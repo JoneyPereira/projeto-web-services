@@ -1,7 +1,7 @@
 package com.example.curso.services;
 
-import com.example.curso.entities.Users;
-import com.example.curso.repositories.UsersRepository;
+import com.example.curso.entities.User;
+import com.example.curso.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,18 +9,18 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UsersService {
+public class UserService {
 
     @Autowired
-    private UsersRepository repository;
+    private UserRepository repository;
 
-    public List<Users> findAll(){
+    public List<User> findAll(){
         return repository.findAll();
     }
 
-    public  Users findById(long id){
+    public User findById(long id){
 
-        Optional<Users> obj = repository.findById(id);
+        Optional<User> obj = repository.findById(id);
         return obj.get();
     }
 
