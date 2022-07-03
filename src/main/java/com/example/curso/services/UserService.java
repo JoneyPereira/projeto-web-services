@@ -13,6 +13,8 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+import javax.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 
@@ -44,10 +46,14 @@ public class UserService {
     }
 
     public User update(Long id, User obj){
-
-        User entity = repository.getReferenceById(id);
+        try{
+            User entity = repository.getReferenceById(id);
         updateData(entity, obj);
         return repository.save(entity);
+        
+        }catch(EntityNotFoundException e){
+            throw new ResourceNotFoundException(id);
+        }        
     }
 
     private void updateData(User entity, User obj){
